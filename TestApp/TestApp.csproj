@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Outrage.EventSource.Cache.Dict\Outrage.EventSource.Cache.Dict.csproj" />
+    <ProjectReference Include="..\Entity_Person\Entity_Person.csproj" />
+    <ProjectReference Include="..\Outrage.EventSource.Cache.Memory\Outrage.EventSource.Cache.Memory.csproj" />
+    <ProjectReference Include="..\Outrage.EventSource.EventSourceDB\Outrage.EventSource.EventStoreDb.csproj" />
+    <ProjectReference Include="..\Outrage.EventSource.File\Outrage.EventSource.File.csproj" />
+  </ItemGroup>
+
+</Project>
