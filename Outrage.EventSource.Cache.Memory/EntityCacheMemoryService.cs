@@ -85,8 +85,9 @@ namespace Outrage.EventSource.Cache.Memory
                 DateTimeOffset.UtcNow.AddMinutes(this.options.Value.CachePeriodMinutes)
             );
             var key = aggregateRoot.GetAggregateRootId();
+            var entityItem = new EntityItem(aggregateRoot, version);
 
-            memoryCache.Set(key, aggregateRoot, memoryOptions);
+            memoryCache.Set(key, entityItem, memoryOptions);
         }
     }
 }

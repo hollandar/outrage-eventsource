@@ -23,7 +23,7 @@ namespace Outrage.EventSource.InMemoryDb
 
             eventList.Add(new EventContainer(eventType, version, json, DateTimeOffset.UtcNow));
 
-            Debug.Assert(version == eventList.Count - 1);
+            Debug.Assert(version == eventList.Count);
             return Task.FromResult(version);
         }
 

@@ -2,9 +2,11 @@
 using Example.PersonEvents;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Outrage.EventSource.Cache.Dict;
 using Outrage.EventSource.Cache.Memory;
 using Outrage.EventSource.Core;
 using Outrage.EventSource.EventStoreDb;
+using Outrage.EventSource.InMemoryDb;
 using System.Diagnostics;
 
 namespace ConsoleApp1
@@ -19,7 +21,7 @@ namespace ConsoleApp1
             });
             serviceCollection.AddMemoryCache();
             serviceCollection.AddSingleton<IEntityCache, EntityCacheMemoryService>();
-            serviceCollection.AddSingleton<IEventStoreService, EventStoreDbService>();
+            serviceCollection.AddSingleton<IEventStoreService, EventStoreInMemoryService>();
             serviceCollection.AddSingleton<EntityService>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
@@ -45,9 +47,9 @@ namespace ConsoleApp1
                 var time = Stopwatch.GetElapsedTime(start);
                 Console.WriteLine($"Loading took {time.TotalMilliseconds}ms");
 
-                System.Diagnostics.Debug.Assert(entity.Name == "Adrian");
+                System.Diagnostics.Debug.Assert(entity.Name == "Johnny");
                 System.Diagnostics.Debug.Assert(entity.PostalAddresses.Count == 1);
-                System.Diagnostics.Debug.Assert(entity.PostalAddresses[0].StreetNo == 3);
+                System.Diagnostics.Debug.Assert(entity.PostalAddresses[0].StreetNo == 14);
             }
         }
     }

@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-	  <Version>0.1.0</Version>
+	  <Version>0.1.1</Version>
 	  <Description>An in memory storage provider for unit testing purposes, for Outrage.EventSource.</Description>
 	  <Authors>Adrian Holland</Authors>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
