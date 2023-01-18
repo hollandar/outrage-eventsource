@@ -5,10 +5,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
-		<Version>0.1.2</Version>
+		<Version>0.2.0</Version>
 		<Description>A cache provider using IMemoryCache for Outrage.EventStore.Core, and event sourcing framework for .NET.</Description>
 		<Authors>Adrian Holland</Authors>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>Outrage.EventSource.Cache.Memory</PackageId>
 
 	</PropertyGroup>

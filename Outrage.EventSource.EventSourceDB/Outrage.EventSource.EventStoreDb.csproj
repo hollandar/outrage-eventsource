@@ -5,10 +5,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
-		<Version>0.1.0</Version>
+		<Version>0.2.0</Version>
 		<Description>A storage provider writing to EventStoreDb for the event sourcing framework Outrage.EventSource.Core.</Description>
 		<Authors>Adrian Holland</Authors>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>Outrage.EventSource.EventStoreDb</PackageId>
 	</PropertyGroup>
 
