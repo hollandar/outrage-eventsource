@@ -11,11 +11,13 @@ namespace Outrage.EventSource.Core
         private IEventStoreService eventStore;
         private IEntityCache? entityCache;
         private ILogger<EntityService>? logger;
+        private IEventStreamer? eventStreamer;
 
         public EntityService(IEventStoreService eventStore, IServiceProvider serviceProvider)
         {
             this.eventStore = eventStore;
             this.entityCache = serviceProvider.GetService<IEntityCache>();
+            this.eventStreamer = serviceProvider.GetService<IEventStreamer>();
             this.logger = serviceProvider.GetService<ILogger<EntityService>>();
 
             if (this.entityCache is not null)
@@ -246,7 +248,14 @@ namespace Outrage.EventSource.Core
             var ent = await ApplyEvent(aggregateRoot, @event);
             if (entityCache is not null)
             {
+                logger.FastLog(LogLevel.Debug, "Updating entity cache with {0}".LogFormat(version));
                 entityCache.UpdateCache(ent, version);
+            }
+
+            if (eventStreamer is not null)
+            {
+                logger.FastLog(LogLevel.Debug, "Streaming event {0}.".LogFormat(() => @event.GetType().Name));
+                await eventStreamer.StreamEventAsync(@event);
             }
 
             return ent;
