@@ -7,6 +7,7 @@ In memory caching of entities is provided by:
  * Outrage.EventSource.Cache.Memory - In memory caching using Microsoft.Extensions.MemoryCache.
 
 Log storage is provided by:
+ * Outrage.EventSource.InMemoryDb - A memory based store, intended for testing; using an in memory ordered list.
  * Outrage.EventSource.File - A file based storage mechanism that appends logs to a binary file.
  * Outrage.EventSource.EventStoreDb - A storage mechanism that integrates with EventStoreDb.
 
