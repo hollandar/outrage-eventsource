@@ -7,14 +7,15 @@ In memory caching of entities is provided by:
  * Outrage.EventSource.Cache.Memory - In memory caching using Microsoft.Extensions.MemoryCache.
 
 Log storage is provided by:
+ * Outrage.EventSource.InMemoryDb - A memory based store, intended for testing; using an in memory ordered list.
  * Outrage.EventSource.File - A file based storage mechanism that appends logs to a binary file.
  * Outrage.EventSource.EventStoreDb - A storage mechanism that integrates with EventStoreDb.
 
 Storage providers should be considered an immutable collection of events.
 
-## DDD
+## Aggregate Root
 
-EventSource supports entity modelling around an aggregate root object keyed using a Guid, an Int64 for a String.
+EventSource supports entity modelling around an aggregate root object keyed using a Guid, an Int64 or a String.
 Below is an example of a Person aggregated entity, keyed by a Guid.
 
 The aggregate root must implemented Serializers, a collection of event serializers with a specific name each, which provide instructions about serialization and deserialization of each event supported.
