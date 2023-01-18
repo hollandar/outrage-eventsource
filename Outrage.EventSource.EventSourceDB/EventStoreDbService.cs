@@ -1,4 +1,5 @@
 ﻿using EventStore.Client;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Orleans.EventSourcing.EventStoreDb.Options;
@@ -12,7 +13,7 @@ namespace Outrage.EventSource.EventStoreDb
         private EventStoreClient eventStoreClient;
         private readonly ILogger<EventStoreDbService>? logger;
 
-        public EventStoreDbService(IOptions<EventStoreOptions> options, ILogger<EventStoreDbService>? logger)
+        public EventStoreDbService(IOptions<EventStoreOptions> options, IServiceProvider serviceProvider)
         {
             var settings = new EventStoreClientSettings
             {
@@ -23,7 +24,7 @@ namespace Outrage.EventSource.EventStoreDb
             };
 
             this.eventStoreClient = new EventStoreClient(settings);
-            this.logger = logger;
+            this.logger = serviceProvider.GetService<ILogger<EventStoreDbService>>();
 
             logger.FastLog(LogLevel.Information, "Storing events using EventStoreDb at {0}".LogFormat(options.Value.Uri));
         }

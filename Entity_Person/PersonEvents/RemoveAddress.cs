@@ -1,4 +1,4 @@
-﻿namespace Example.PersonEvents
+﻿namespace Entity_Person.PersonEvents
 {
     public abstract class RemoveAddress: PersonEventBase
     {

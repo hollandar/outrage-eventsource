@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
 using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Outrage.EventSource.Core
 {
@@ -12,11 +12,11 @@ namespace Outrage.EventSource.Core
         private IEntityCache? entityCache;
         private ILogger<EntityService>? logger;
 
-        public EntityService(IEventStoreService eventStore, IEntityCache? entityCache, ILogger<EntityService>? logger)
+        public EntityService(IEventStoreService eventStore, IServiceProvider serviceProvider)
         {
-            this.entityCache = entityCache;
             this.eventStore = eventStore;
-            this.logger = logger;
+            this.entityCache = serviceProvider.GetService<IEntityCache>();
+            this.logger = serviceProvider.GetService<ILogger<EntityService>>();
 
             if (this.entityCache is not null)
             {
@@ -203,7 +203,7 @@ namespace Outrage.EventSource.Core
 
             var aggregateRootType = aggregateRoot.GetType();
             var eventType = @event.GetType();
-            long version = 0;
+            long version = 1;
             if (eventStore != null)
             {
                 // We have a serializer and serialization is enabled

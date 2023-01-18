@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
-		<Version>0.1.0</Version>
+		<Version>0.1.1</Version>
 		<Description>An event sourcing framework for .NET.</Description>
 		<Authors>Adrian Holland</Authors>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -14,6 +14,8 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		
 	</ItemGroup>
 
 </Project>

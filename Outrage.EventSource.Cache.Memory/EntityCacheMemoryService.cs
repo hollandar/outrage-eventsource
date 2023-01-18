@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
@@ -15,11 +16,11 @@ namespace Outrage.EventSource.Cache.Memory
         private readonly IOptions<EntityCacheMemoryOptions> options;
         private readonly ILogger<EntityCacheMemoryService>? logger;
 
-        public EntityCacheMemoryService(IMemoryCache memoryCache, IOptions<EntityCacheMemoryOptions> options, ILogger<EntityCacheMemoryService>? logger)
+        public EntityCacheMemoryService(IMemoryCache memoryCache, IOptions<EntityCacheMemoryOptions> options, IServiceProvider serviceProvider)
         {
             this.memoryCache = memoryCache;
             this.options = options;
-            this.logger = logger;
+            this.logger = serviceProvider.GetService<ILogger<EntityCacheMemoryService>>();
             logger.FastLog(LogLevel.Information, "Caching entities using in memory caching for cache period {} min.".LogFormat(this.options.Value.CachePeriodMinutes));
 
         }
@@ -85,7 +86,7 @@ namespace Outrage.EventSource.Cache.Memory
                 DateTimeOffset.UtcNow.AddMinutes(this.options.Value.CachePeriodMinutes)
             );
             var key = aggregateRoot.GetAggregateRootId();
-            var entityItem = new EntityItem(aggregateRoot, version);
+            var entityItem = new EntityItem(aggregateRoot, version, memoryOptions.AbsoluteExpiration);
 
             memoryCache.Set(key, entityItem, memoryOptions);
         }

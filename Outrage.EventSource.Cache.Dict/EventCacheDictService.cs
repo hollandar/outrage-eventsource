@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Outrage.EventSource.Cache.Dict.Options;
@@ -16,10 +12,10 @@ namespace Outrage.EventSource.Cache.Dict
         private readonly ILogger<EntityCacheDictService>? logger;
         private readonly Dictionary<object, EntityItem> _cache = new();
         private readonly SemaphoreSlim semaphore = new(1);
-        public EntityCacheDictService(IOptions<EntityCacheDictOptions> options, ILogger<EntityCacheDictService>? logger)
+        public EntityCacheDictService(IOptions<EntityCacheDictOptions> options, IServiceProvider serviceProvider)
         {
             this.options = options;
-            this.logger = logger;
+            this.logger = serviceProvider.GetService<ILogger<EntityCacheDictService>>();
             logger.FastLog(LogLevel.Information, "Caching entities using an in memory dictionary.".LogFormat());
         }
 
@@ -111,7 +107,7 @@ namespace Outrage.EventSource.Cache.Dict
         public void UpdateCache(IAggregateRoot aggregateRoot, long version)
         {
             var id = aggregateRoot.GetAggregateRootId();
-            _cache[id] = new EntityItem(aggregateRoot, version, DateTimeOffset.UtcNow.AddMicroseconds(this.options.Value.CachePeriodMinutes));
+            _cache[id] = new EntityItem(aggregateRoot, version, DateTimeOffset.UtcNow.AddMinutes(this.options.Value.CachePeriodMinutes));
         }
     }
 }

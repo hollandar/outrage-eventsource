@@ -1,11 +1,9 @@
-﻿using Example;
-using Example.PersonEvents;
+﻿using Entity_Person.PersonEvents;
+using Example;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Outrage.EventSource.Cache.Dict;
-using Outrage.EventSource.Cache.Memory;
 using Outrage.EventSource.Core;
-using Outrage.EventSource.EventStoreDb;
 using Outrage.EventSource.InMemoryDb;
 using System.Diagnostics;
 
@@ -26,8 +24,8 @@ namespace ConsoleApp1
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             
-            var entityService = serviceProvider.GetService<EntityService>();
-            var entityCache = serviceProvider.GetService<IEntityCache>();
+            var entityService = serviceProvider.GetService<EntityService>()!;
+            var entityCache = serviceProvider.GetService<IEntityCache>()!;
 
             var personId = Guid.NewGuid();
             {

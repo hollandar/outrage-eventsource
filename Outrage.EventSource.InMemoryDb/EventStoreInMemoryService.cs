@@ -14,7 +14,7 @@ namespace Outrage.EventSource.InMemoryDb
 
         public Task<long> AppendToStreamAsync(string stream, string eventType, long version, string json)
         {
-            IList<EventContainer> eventList;
+            IList<EventContainer>? eventList;
             if (!this.events.TryGetValue(stream, out eventList))
             {
                 eventList = new List<EventContainer>();

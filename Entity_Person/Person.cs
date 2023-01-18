@@ -1,4 +1,4 @@
-﻿using Example.PersonEvents;
+﻿using Entity_Person.PersonEvents;
 using Outrage.EventSource.Core;
 
 namespace Example
@@ -11,6 +11,7 @@ namespace Example
         public string EmailAddress { get; set; } = string.Empty;
         public List<Address> PostalAddresses { get; set; } = new();
         public List<Address> StreetAddresses { get; set; } = new();
+        public int Age { get; set; } = -1;
 
         public List<EventSerializer<PersonEventBase>> Serializers
         {
@@ -23,6 +24,7 @@ namespace Example
                     new EventSerializer<PersonEventBase, AddStreetAddress>("AddStreetAddress"),
                     new EventSerializer<PersonEventBase, UpdateEmailAddress>("UpdateEmailAddress"),
                     new EventSerializer<PersonEventBase, UpdateMobilePhone>("UpdateMobilePhone"),
+                    new EventSerializer<PersonEventBase, SetAgeEvent>("SetAgeEvent"),
                 };
             }
         }
@@ -93,6 +95,11 @@ namespace Example
         public void Apply(UpdateMobilePhone @event)
         {
             this.MobilePhone = @event.MobilePhone;
+        }
+
+        public void Apply(SetAgeEvent evt)
+        {
+            this.Age = evt.Age;
         }
     }
 }
