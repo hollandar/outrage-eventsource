@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outrage.EventSource.File", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outrage.EventSource.Cache.Memory", "Outrage.EventSource.Cache.Memory\Outrage.EventSource.Cache.Memory.csproj", "{993AA958-02C4-4790-A192-F71D364FA87D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outrage.EventSource.EventStoreDb", "Outrage.EventSource.EventSourceDb\Outrage.EventSource.EventStoreDb.csproj", "{A38E3422-8C9F-4278-9E8F-5CDDED191C82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outrage.EventSource.EventStoreDb", "Outrage.EventSource.EventStoreDb\Outrage.EventSource.EventStoreDb.csproj", "{A38E3422-8C9F-4278-9E8F-5CDDED191C82}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{71AAEF9F-C277-4AA6-A311-6450EB29355C}"
 EndProject
