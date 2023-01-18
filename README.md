@@ -13,9 +13,9 @@ Log storage is provided by:
 
 Storage providers should be considered an immutable collection of events.
 
-## DDD
+## Aggregate Root
 
-EventSource supports entity modelling around an aggregate root object keyed using a Guid, an Int64 for a String.
+EventSource supports entity modelling around an aggregate root object keyed using a Guid, an Int64 or a String.
 Below is an example of a Person aggregated entity, keyed by a Guid.
 
 The aggregate root must implemented Serializers, a collection of event serializers with a specific name each, which provide instructions about serialization and deserialization of each event supported.
