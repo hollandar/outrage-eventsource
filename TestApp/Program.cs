@@ -20,7 +20,7 @@ namespace ConsoleApp1
                 options.AddConsole();
             });
             serviceCollection.AddMemoryCache();
-            serviceCollection.AddSingleton<IEntityCache, EntityCacheMemoryService>();
+            serviceCollection.AddSingleton<IEntityCache, EntityCacheDictService>();
             serviceCollection.AddSingleton<IEventStoreService, EventStoreInMemoryService>();
             serviceCollection.AddSingleton<EntityService>();
 

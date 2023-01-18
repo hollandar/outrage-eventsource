@@ -203,6 +203,7 @@ namespace Outrage.EventSource.Core
 
             var aggregateRootType = aggregateRoot.GetType();
             var eventType = @event.GetType();
+            long version = 0;
             if (eventStore != null)
             {
                 // We have a serializer and serialization is enabled
@@ -219,7 +220,6 @@ namespace Outrage.EventSource.Core
 
                 var typeName = aggregateRootType.Name;
                 var streamName = $"{typeName}_{id}";
-                long version = 0;
                 if (this.entityCache?.TryGetEntityItem(aggregateRoot, out var entityItem) ?? false)
                 {
                     // We have loaded this entity already;
@@ -243,7 +243,13 @@ namespace Outrage.EventSource.Core
             }
 
 
-            return await ApplyEvent(aggregateRoot, @event);
+            var ent = await ApplyEvent(aggregateRoot, @event);
+            if (entityCache is not null)
+            {
+                entityCache.UpdateCache(ent, version);
+            }
+
+            return ent;
         }
     }
 }
