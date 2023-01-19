@@ -9,6 +9,6 @@ namespace Outrage.EventSource.Core
 {
     public interface IEventStreamer
     {
-        Task StreamEventAsync<TEventType> (TEventType evt);
+        Task StreamEventAsync (IAggregateRootEvent evt);
     }
 }

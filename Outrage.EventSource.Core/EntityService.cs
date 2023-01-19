@@ -255,7 +255,15 @@ namespace Outrage.EventSource.Core
             if (eventStreamer is not null)
             {
                 logger.FastLog(LogLevel.Debug, "Streaming event {0}.".LogFormat(() => @event.GetType().Name));
-                await eventStreamer.StreamEventAsync(@event);
+                IAggregateRootEvent eventContainer = aggregateRoot switch
+                {
+                    IAggregateRootWithGuidKey guidRoot => new AggregateRootEvent<Guid, TEventBase>(guidRoot.Id, @event),
+                    IAggregateRootWithLongKey guidRoot => new AggregateRootEvent<Int64, TEventBase>(guidRoot.Id, @event),
+                    IAggregateRootWithStringKey guidRoot => new AggregateRootEvent<string, TEventBase>(guidRoot.Id, @event),
+                    _ => throw new Exception("Key type handler not defined for IEventStreamer")
+                };
+
+                await eventStreamer.StreamEventAsync(eventContainer);
             }
 
             return ent;
