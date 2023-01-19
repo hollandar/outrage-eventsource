@@ -186,6 +186,11 @@ Once an entity exists, you can reload it later and replay all of its events agai
 ```c#
 var entity = await entityService.GetEntity<Person, PersonEventBase>(personId);
 ```
+
+## Event Streaming
+
+A service that implements IEventStreamer can be injected, this service receives an IAggregateRootEvent which is an instance of AggregateRootEvent<TKeyType, TEventBase>.  This allows you to populate appropriate views of the entities after storage of the events is complete.
+
 ## Roadmap
 
  * Support entity rebuild to a specific timestamp.
